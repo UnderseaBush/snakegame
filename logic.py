@@ -3,8 +3,9 @@ import pygame, sys
 import serial
 from pygame.locals import *
 import time
-#import snake
-#import food
+import random
+import snake
+import food
 
 WinWIDTH = 500
 WinHEIGHT = 480
@@ -13,6 +14,8 @@ FPS = 30
 
 GREY = (128, 128, 128)
 RED = (255, 0, 0)
+my_food = food.Food(random.random()*400, random.random()*400)
+#my_snake = snake.Snake(
 
 def main():
 	pygame.init()
@@ -38,6 +41,8 @@ def main():
 			
 		#Update Display
 		drawWorld(window)
+		my_food.draw(window)
+		
 		pygame.display.update()
 		fpsClock.tick(FPS)
 		
