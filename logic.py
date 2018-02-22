@@ -10,6 +10,7 @@ import food
 WinWIDTH = 500
 WinHEIGHT = 480
 
+SPEED = 2
 FPS = 30
 
 GREY = (128, 128, 128)
@@ -22,23 +23,30 @@ def main():
 	fpsClock = pygame.time.Clock()
 	window = pygame.display.set_mode((WinWIDTH, WinHEIGHT), 0, 32)
 	pygame.display.set_caption('SNAKE')
-	
+
 	while(True):
-	
+
 		#Events
 		for event in pygame.event.get():
 			#kEY events
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_UP:
+					my_snake.moveUp(SPEED)
 					print 'up arrow'
-					Message(window, 'GAME START')
-					#TODO remaining key events
-					
+				if event.key == pygame.K_DOWN:
+					my_snake.moveDown(SPEED*-1)
+				if event.key == pygame.K_RIGHT:
+					my_snake.moveRight(SPEED)
+				if event.key == pygame.K_LEFT:
+					my_snake.moveLeft(SPEED*-1)
+				if event.key == pygame.K_SPACE:
+					my_snake.move(1.0/FPS)
+
 			#QUIT event
 			if event.type == QUIT:
 				pygame.quit()
 				sys.exit()
-			
+
 		#Update Display
 		drawWorld(window)
 		my_food.draw(window)
@@ -46,10 +54,10 @@ def main():
 
 		pygame.display.update()
 		fpsClock.tick(FPS)
-		
+
 def drawWorld(surf):
 	surf.fill(GREY)
-	
+
 def Message(surf, msg):
 	#display GAME OVER and WINNER
 	fontObj = pygame.font.Font('freesansbold.ttf', 32)
