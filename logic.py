@@ -15,7 +15,7 @@ FPS = 30
 GREY = (128, 128, 128)
 RED = (255, 0, 0)
 my_food = food.Food(random.random()*400, random.random()*400)
-#my_snake = snake.Snake(
+my_snake = snake.Snake(random.random()*400, random.random()*400)
 
 def main():
 	pygame.init()
@@ -42,7 +42,8 @@ def main():
 		#Update Display
 		drawWorld(window)
 		my_food.draw(window)
-		
+		my_snake.draw(window)
+
 		pygame.display.update()
 		fpsClock.tick(FPS)
 		

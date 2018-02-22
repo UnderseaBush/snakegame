@@ -1,10 +1,10 @@
 #!/usr/bin/python
 import pygame
 SNAKE_SIZE = 10
-SNAKE_COLOR = (0,0,255)
+SNAKE_COLOR = (0,255,0)
 
 
-Class Snake:
+class Snake:
 	def __init__(self, x, y):
 		self.x = x
 		self.y = y

@@ -10,7 +10,7 @@ class Food:
 		self.x = x
 		self.y = y
 		self.rect =  pygame.Rect((0,0,FOOD_SIZE,FOOD_SIZE))
-		self.moveTo(x,y)
+		self.move(x,y)
 
 	def move(self, x, y):
 		self.x = x
