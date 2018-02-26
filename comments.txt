@@ -1,5 +1,9 @@
 #Might be cool to use a potentiometer to increase or decrease speed level of game. Also possibility that as your snake gets bigger, it also gets faster. 
+
 #Maybe make a timer for powerups to be displayed only for a certain time
+
 #May be a good idea to use a graphic or something to signify that this is food. Maybe make a legend in the game screen for your snake, food, etc!
+
 #Good idea to make things less complicated with the SPEED * -1. 
+
 #Might need to add a grow method in snake.py

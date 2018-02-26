@@ -1,3 +1,7 @@
+#Might be cool to use a potentiometer to increase or decrease speed level of game. 
+#Maybe make a timer for powerups to be displayed only for a certain time
+#
+
 #!/usr/bin/python
 import pygame, sys
 import serial
@@ -15,7 +19,7 @@ FPS = 30
 
 GREY = (128, 128, 128)
 RED = (255, 0, 0)
-my_food = food.Food(random.random()*400, random.random()*400)
+my_food = food.Food(random.random()*400, random.random()*400) #May be a good idea to use a graphic or something to signify that this is food. Maybe make a legend in the game screen for your snake, food, etc!
 my_snake = snake.Snake(random.random()*400, random.random()*400)
 
 def main():
@@ -34,7 +38,7 @@ def main():
 					my_snake.moveUp(SPEED)
 					print 'up arrow'
 				if event.key == pygame.K_DOWN:
-					my_snake.moveDown(SPEED*-1)
+					my_snake.moveDown(SPEED*-1) #Good idea to make things less complicated
 				if event.key == pygame.K_RIGHT:
 					my_snake.moveRight(SPEED)
 				if event.key == pygame.K_LEFT:
