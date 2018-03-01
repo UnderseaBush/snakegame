@@ -9,6 +9,7 @@ class Snake:
 		self.x = x
 		self.y = y
 		self.rect = pygame.Rect((0,0,SNAKE_SIZE,SNAKE_SIZE))
+<<<<<<< HEAD
 		self.vel = 1 
 
 	def moveUp(self, dt):
@@ -23,6 +24,16 @@ class Snake:
 	def moveRight(self, dt):
 		self.x = self.x+ self.vel *dt
 		
+=======
+		self.vel = 50
+
+	def move(self, time, x, y):
+		self.vel_x = x
+		self.vel_y = y
+		self.x = self.x + self.vel_x*time
+		self.y = self.y + self.vel_y*time
+
+>>>>>>> f6c289f982aeec559acd6185bb92a688e74d874b
 
 	def draw(self, surf):
 		self.rect.center = (self.x,self.y)
