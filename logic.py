@@ -10,8 +10,9 @@ import food
 WinWIDTH = 500
 WinHEIGHT = 480
 
-SPEED = 2
-FPS = 30
+SPEED = 30
+FPS = 60
+
 
 GREY = (128, 128, 128)
 RED = (255, 0, 0)
@@ -23,6 +24,9 @@ def main():
 	fpsClock = pygame.time.Clock()
 	window = pygame.display.set_mode((WinWIDTH, WinHEIGHT), 0, 32)
 	pygame.display.set_caption('SNAKE')
+	START = False
+	Xdir = 0
+	Ydir = 0
 
 	while(True):
 
@@ -31,21 +35,29 @@ def main():
 			#kEY events
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_UP:
-					my_snake.moveUp(SPEED)
-					print 'up arrow'
+					Ydir = -SPEED
+					Xdir = 0
 				if event.key == pygame.K_DOWN:
-					my_snake.moveDown(SPEED*-1)
+					Ydir = SPEED
+					Xdir = 0
 				if event.key == pygame.K_RIGHT:
-					my_snake.moveRight(SPEED)
+					Ydir = 0
+					Xdir = SPEED
 				if event.key == pygame.K_LEFT:
-					my_snake.moveLeft(SPEED*-1)
+					Ydir = 0
+					Xdir = -SPEED
 				if event.key == pygame.K_SPACE:
-					my_snake.move(1.0/FPS)
+					Xdir = SPEED
+					Ydir = 0
+					START = True
 
 			#QUIT event
 			if event.type == QUIT:
 				pygame.quit()
 				sys.exit()
+		#Game Logic
+		if START:
+			my_snake.move(1.0/FPS, Xdir, Ydir)
 
 		#Update Display
 		drawWorld(window)

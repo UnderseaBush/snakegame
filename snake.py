@@ -8,24 +8,14 @@ class Snake:
 	def __init__(self, x, y):
 		self.x = x
 		self.y = y
-		self.v_x = 1
 		self.rect = pygame.Rect((0,0,SNAKE_SIZE,SNAKE_SIZE))
-		self.vel = 1
+		self.vel = 50
 
-	def move(self, time):
-		self.x = self.x + self.v_x*time
-
-	def moveUp(self, dt):
-		self.y = self.y - self.vel * dt
-
-	def moveDown(self, dt):
-		self.y = self.y + self.vel * (-dt)
-
-	def moveLeft(self, dt):
-		self.x = self.x-self.vel * (-dt)
-
-	def moveRight(self, dt):
-		self.x = self.x+ self.vel *dt
+	def move(self, time, x, y):
+		self.vel_x = x
+		self.vel_y = y
+		self.x = self.x + self.vel_x*time
+		self.y = self.y + self.vel_y*time
 
 
 	def draw(self, surf):
