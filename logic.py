@@ -13,12 +13,15 @@ WinHEIGHT = 480
 SPEED = 30
 FPS = 60
 
+strTime = '5'
 
 GREY = (128, 128, 128)
 RED = (255, 0, 0)
 BLUE = (0, 0, 100)
+GREEN = (0, 255, 0)
 my_food = food.Food(random.random()*400, random.random()*400)
 my_snake = snake.Snake(random.random()*400, random.random()*400)
+my_time = snake.Timer()
 
 def main():
 	pygame.init()
@@ -30,8 +33,6 @@ def main():
 	Ydir = 0
 
 	while(True):
-		print my_snake.x
-
 		#Events
 		for event in pygame.event.get():
 			#kEY events
@@ -54,13 +55,19 @@ def main():
 					START = True
 					Message(window, 'GO!', BLUE)
 
+				if event.key == pygame.K_k:
+					Timer()
+
 			#QUIT event
 			if event.type == QUIT:
 				pygame.quit()
 				sys.exit()
 		#Game Logic
 		if START:
+			Timer()
 			my_snake.move(1.0/FPS, Xdir, Ydir)
+			print "Class", my_time.time
+			#Message(window, strTime, GREEN)
 
 		if BoxBounds():
 			Message(window, 'FAIL', RED)
@@ -91,6 +98,10 @@ def BoxBounds():
 		return True
 	else:
 		return False
+
+def Timer():
+	time = pygame.time.get_ticks()/1000
+	print time
 
 
 if __name__=="__main__":
