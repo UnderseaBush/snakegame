@@ -1,5 +1,7 @@
 #!/usr/bin/python
-import pygame
+import pygame, sys
+from pygame.locals import *
+import time
 SNAKE_SIZE = 10
 SNAKE_COLOR = (0,255,0)
 
@@ -38,3 +40,7 @@ class Snake:
 	def draw(self, surf):
 		self.rect.center = (self.x,self.y)
 		pygame.draw.rect(surf, SNAKE_COLOR, self.rect)
+
+class Timer:
+	def __init__(self):
+		self.time = pygame.time.get_ticks()/1000

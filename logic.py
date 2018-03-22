@@ -13,11 +13,15 @@ WinHEIGHT = 480
 SPEED = 30
 FPS = 60
 
+strTime = '5'
 
 GREY = (128, 128, 128)
 RED = (255, 0, 0)
+BLUE = (0, 0, 100)
+GREEN = (0, 255, 0)
 my_food = food.Food(random.random()*400, random.random()*400)
 my_snake = snake.Snake(random.random()*400, random.random()*400)
+my_time = snake.Timer()
 
 def main():
 	pygame.init()
@@ -29,7 +33,6 @@ def main():
 	Ydir = 0
 
 	while(True):
-
 		#Events
 		for event in pygame.event.get():
 			#kEY events
@@ -50,6 +53,10 @@ def main():
 					Xdir = SPEED
 					Ydir = 0
 					START = True
+					Message(window, 'GO!', BLUE)
+
+				if event.key == pygame.K_k:
+					Timer()
 
 			#QUIT event
 			if event.type == QUIT:
@@ -57,7 +64,13 @@ def main():
 				sys.exit()
 		#Game Logic
 		if START:
+			Timer()
 			my_snake.move(1.0/FPS, Xdir, Ydir)
+			print "Class", my_time.time
+			#Message(window, strTime, GREEN)
+
+		if BoxBounds():
+			Message(window, 'FAIL', RED)
 
 		#Update Display
 		drawWorld(window)
@@ -70,15 +83,26 @@ def main():
 def drawWorld(surf):
 	surf.fill(GREY)
 
-def Message(surf, msg):
+def Message(surf, msg, clr):
 	#display GAME OVER and WINNER
 	fontObj = pygame.font.Font('freesansbold.ttf', 32)
-	textSurfObj = fontObj.render(msg, True, RED)
+	textSurfObj = fontObj.render(msg, True, clr)
 	textRectObj = textSurfObj.get_rect()
 	textRectObj.center = (WinWIDTH/2, WinHEIGHT/2)
 	surf.blit(textSurfObj,textRectObj)
 	pygame.display.update()
 	time.sleep(1)
+
+def BoxBounds():
+	if (my_snake.x>WinWIDTH)or(my_snake.x<0)or(my_snake.y>WinHEIGHT)or(my_snake.y<0):
+		return True
+	else:
+		return False
+
+def Timer():
+	time = pygame.time.get_ticks()/1000
+	print time
+
 
 if __name__=="__main__":
 	main()
