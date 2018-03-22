@@ -7,10 +7,10 @@ import random
 import snake
 import food
 
-WinWIDTH = 500
-WinHEIGHT = 480
+WinWIDTH = 300
+WinHEIGHT = 280
 
-SPEED = 30
+
 FPS = 60
 
 strTime = '5'
@@ -19,9 +19,10 @@ GREY = (128, 128, 128)
 RED = (255, 0, 0)
 BLUE = (0, 0, 100)
 GREEN = (0, 255, 0)
-my_food = food.Food(random.random()*400, random.random()*400)
-my_snake = snake.Snake(random.random()*400, random.random()*400)
+my_food = food.Food(random.random()*WinWIDTH, random.random()*WinHEIGHT)
+my_snake = snake.Snake(random.random()*WinWIDTH, random.random()*WinHEIGHT)
 my_time = snake.Timer()
+
 
 def main():
 	pygame.init()
@@ -31,6 +32,8 @@ def main():
 	START = False
 	Xdir = 0
 	Ydir = 0
+	score = -1
+	SPEED = 30
 
 	while(True):
 		#Events
@@ -72,11 +75,18 @@ def main():
 		if BoxBounds():
 			Message(window, 'FAIL', RED)
 
+		if my_food.hitBy(my_snake):
+			my_food.x = random.random()*WinWIDTH
+			my_food.y = random.random()*WinHEIGHT
+			score = score + 1
+			SPEED = SPEED + 10
+			
+
 		#Update Display
 		drawWorld(window)
 		my_food.draw(window)
 		my_snake.draw(window)
-
+		DisplayScore(window, str(score))
 		pygame.display.update()
 		fpsClock.tick(FPS)
 
@@ -92,6 +102,19 @@ def Message(surf, msg, clr):
 	surf.blit(textSurfObj,textRectObj)
 	pygame.display.update()
 	time.sleep(1)
+
+
+
+def DisplayScore(surf, score):
+	
+	fontObj = pygame.font.Font('freesansbold.ttf', 32)
+	textSurfObj = fontObj.render(score, True, BLUE)
+	textRectObj = textSurfObj.get_rect()
+	textRectObj.center = (WinWIDTH-25, WinHEIGHT-25)
+	surf.blit(textSurfObj,textRectObj)
+	
+	
+
 
 def BoxBounds():
 	if (my_snake.x>WinWIDTH)or(my_snake.x<0)or(my_snake.y>WinHEIGHT)or(my_snake.y<0):
